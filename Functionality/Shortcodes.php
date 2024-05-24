@@ -31,7 +31,7 @@ class Shortcodes {
 		if (!is_user_logged_in())
             return;
 
-        $user_id     = get_current_user_id();
+        $user_id = get_current_user_id();
         $profileuser = get_userdata($user_id);
 
         if (isset($_POST['manage_avatar_submit'])){
@@ -51,7 +51,7 @@ class Shortcodes {
                 echo '<p><input type="file" name="basic-user-avatar" id="basic-local-avatar" /></p>';
 
                 if (empty($profileuser->basic_user_avatar)) {
-                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text',esc_html__('No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
+                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
                 } else {
                     				
                     echo '<p class="description">' . apply_filters('bu_avatars_replace_avatar_text', esc_html__('Replace the local avatar by uploading a new avatar, or erase the local avatar (falling back to a gravatar) by checking the delete option.', 'basic-user-avatars'), $profileuser) . '</p>';
@@ -63,7 +63,7 @@ class Shortcodes {
                 if (empty($profileuser->basic_user_avatar)) {
                     echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars'), $profileuser) . '</p>';
                 } else {
-                    echo '<p class="description">' . apply_filters('bu_avatars_permissions_text', esc_html__('You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars'), $profileuser) . '</p>';
+                    echo '<p class="description">' . apply_filters('bu_avatars_permissions_text', esc_html__('You do not have permission to change your avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
                 }	
             }
             ?>
@@ -72,7 +72,7 @@ class Shortcodes {
         return ob_get_clean();
     }
 
-    public function get_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = false, $args = array()) {		
+    public function get_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = false, $args = []) {		
 		return apply_filters('basic_user_avatar', $avatar, $id_or_email);
 	}
 
@@ -111,7 +111,7 @@ class Shortcodes {
 			$wp_user_avatar_id = get_user_meta($user_id, $wpdb->get_blog_prefix() . 'user_avatar', true);
 			if (!empty($wp_user_avatar_id)) {
 				$wp_user_avatar_url = wp_get_attachment_url(intval($wp_user_avatar_id));
-				$local_avatars = array('full' => $wp_user_avatar_url);
+				$local_avatars = ['full' => $wp_user_avatar_url];
 				update_user_meta($user_id, 'basic_user_avatar', $local_avatars);
 			} else {
 				return $args;
@@ -133,22 +133,22 @@ class Shortcodes {
 			}
 
 			if (empty($image_sized) || is_wp_error($image_sized)) {
-				$local_avatars[ $size ] = $local_avatars['full'];
+				$local_avatars[$size] = $local_avatars['full'];
 			} else {
-				$local_avatars[ $size ] = str_replace($upload_path['basedir'], $upload_path['baseurl'], $image_sized['path']);
+				$local_avatars[$size] = str_replace($upload_path['basedir'], $upload_path['baseurl'], $image_sized['path']);
 			}
 
 			update_user_meta($user_id, 'basic_user_avatar', $local_avatars);
 
-		} elseif (substr($local_avatars[ $size ], 0, 4) != 'http') {
-			$local_avatars[ $size ] = home_url($local_avatars[ $size ]);
+		} elseif (substr($local_avatars[$size], 0, 4) != 'http') {
+			$local_avatars[$size] = home_url($local_avatars[$size]);
 		}
 
 		if (is_ssl()) {
-			$local_avatars[ $size ] = str_replace('http:', 'https:', $local_avatars[ $size ]);
+			$local_avatars[$size] = str_replace('http:', 'https:', $local_avatars[$size]);
 		}
 
-		$user_avatar_url = $local_avatars[ $size ];
+		$user_avatar_url = $local_avatars[$size];
 
 		if ($user_avatar_url) {
 			$return_args['url'] = $user_avatar_url;
@@ -206,11 +206,11 @@ class Shortcodes {
 
         if (!empty($_FILES['basic-user-avatar']['name'])) {
 
-            $mimes = array(
+            $mimes = [
                 'jpg|jpeg|jpe' => 'image/jpeg',
                 'gif'          => 'image/gif',
                 'png'          => 'image/png',
-            );
+            ];
 
             if (!function_exists('wp_handle_upload'))
                 require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -221,7 +221,11 @@ class Shortcodes {
                 wp_die('For security reasons, the extension ".php" cannot be in your file name.');
 
             $this->user_id_being_edited = $user_id; 
-            $avatar = wp_handle_upload($_FILES['basic-user-avatar'], array('mimes' => $mimes, 'test_form' => false, 'unique_filename_callback' => array($this, 'unique_filename_callback')));
+            $avatar = wp_handle_upload($_FILES['basic-user-avatar'], [
+                'mimes' => $mimes, 
+                'test_form' => false, 
+                'unique_filename_callback' => [$this, 'unique_filename_callback']
+            ]);
 
             if (empty($avatar['file'])) {  
                 switch ($avatar['error']) {
@@ -242,7 +246,7 @@ class Shortcodes {
                 return;
             }
 
-            update_user_meta($user_id, 'basic_user_avatar', array('full' => $avatar['url']));
+            update_user_meta($user_id, 'basic_user_avatar', ['full' => $avatar['url']]);
 
         } elseif (!empty($_POST['basic-user-avatar-erase'])) {
             $this->avatar_delete($user_id);
