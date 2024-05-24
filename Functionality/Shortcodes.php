@@ -6,6 +6,8 @@ class Shortcodes {
 
     protected $plugin_name;
     protected $plugin_version;
+
+    private $user_id_being_edited;
     
     public function __construct($plugin_name, $plugin_version) {
         $this->plugin_name = $plugin_name;
