@@ -250,7 +250,6 @@ class Shortcodes {
                     break;
                 default :
                     add_action( 'user_profile_update_errors', function( $error = 'avatar_error' ){
-                        // No error let's bail.
                         if ( empty( $avatar['error'] ) ) {
                             return;
                         }
@@ -265,7 +264,7 @@ class Shortcodes {
             update_user_meta( $user_id, 'basic_user_avatar', array( 'full' => $avatar['url'] ) );
 
         } elseif ( ! empty( $_POST['basic-user-avatar-erase'] ) ) {
-            // Nuke the current avatar
+            // Delete current avatar
             $this->avatar_delete( $user_id );
         }
     }
