@@ -8,7 +8,7 @@ class Shortcodes {
     protected $plugin_version;
     
     public function __construct($plugin_name, $plugin_version) {
-        $this->plguin_name = $plugin_name;
+        $this->plugin_name = $plugin_name;
         $this->plugin_version = $plugin_version;
         
         //Actions
