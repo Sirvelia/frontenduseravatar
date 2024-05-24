@@ -30,7 +30,7 @@ class Shortcodes {
     function shortcode() {
         // Don't bother if the user isn't logged in
 		if ( ! is_user_logged_in() )
-        return;
+            return;
 
         $user_id     = get_current_user_id();
         $profileuser = get_userdata( $user_id );
@@ -226,7 +226,7 @@ class Shortcodes {
                 'png'          => 'image/png',
             );
 
-            // Front end support - shortcode, bbPress, etc
+            // Front end support - shortcode
             if ( ! function_exists( 'wp_handle_upload' ) )
                 require_once ABSPATH . 'wp-admin/includes/file.php';
 
