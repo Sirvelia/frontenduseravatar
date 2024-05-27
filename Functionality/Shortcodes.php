@@ -3,46 +3,46 @@
 namespace FrontendUserAvatar\Functionality;
 
 class Shortcodes {
-
-    protected $plugin_name;
+	protected $plugin_id;
     protected $plugin_version;
 
-    private $user_id_being_edited;
+    private $editing_user_id;
     
-    public function __construct($plugin_name, $plugin_version) {
-        $this->plugin_name = $plugin_name;
+    public function __construct($plugin_id, $plugin_version) {
+        $this->plugin_id = $plugin_id;
         $this->plugin_version = $plugin_version;
         
-        //Actions
-        add_action('show_user_profile', [$this, 'edit_user_profile']); 
-        add_action('edit_user_profile', [$this, 'edit_user_profile']); 
-        add_action('personal_options_update', [$this, 'edit_user_profile_update']);
-        add_action('edit_user_profile_update', [$this, 'edit_user_profile_update']);
+        // Actions
+        add_action('show_user_profile', [$this, 'edit_user_avatar_profile']); 
+        add_action('edit_user_profile', [$this, 'edit_user_avatar_profile']); 
+        add_action('personal_options_update', [$this, 'update_user_avatar_profile']);
+        add_action('edit_user_profile_update', [$this, 'update_user_avatar_profile']);
 
-        //Filters
-        add_filter('get_avatar_data', [$this, 'get_avatar_data'], 10, 2);
-        add_filter('get_avatar', [$this, 'get_avatar'], 10, 6);
+        // Filters
+        add_filter('get_avatar_data', [$this, 'customize_avatar_data'], 10, 2);
+        add_filter('get_avatar', [$this, 'customize_avatar'], 10, 6);
 
-        //Shortcodes
-        add_shortcode('frontend-user-avatar', [$this, 'shortcode']);
+        // Shortcodes
+        add_shortcode('frontend-user-avatar', [$this, 'user_avatar_shortcode']);
     }
 
-    function shortcode() {
+	// Front-end shortcode
+    function user_avatar_shortcode() {
 		if (!is_user_logged_in())
             return;
 
         $user_id = get_current_user_id();
-        $profileuser = get_userdata($user_id);
+        $profile_user = get_userdata($user_id);
 
         if (isset($_POST['manage_avatar_submit'])){
-            $this->edit_user_profile_update($user_id);
+            $this->update_user_avatar_profile($user_id);
         }
 
         ob_start();
         ?>
         <form id="basic-user-avatar-form" method="post" enctype="multipart/form-data">
             <?php
-            echo get_avatar($profileuser->ID);
+            echo get_avatar($profile_user->ID);
 
             $options = get_option('user_avatars_caps');
             if (empty($options['user_avatars_caps']) || current_user_can('upload_files')) {
@@ -50,20 +50,20 @@ class Shortcodes {
                 
                 echo '<p><input type="file" name="basic-user-avatar" id="basic-local-avatar" /></p>';
 
-                if (empty($profileuser->user_avatar)) {
-                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
+                if (empty($profile_user->user_avatar)) {
+                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars'), $profile_user) . '</p>';
                 } else {
                     				
-                    echo '<p class="description">' . apply_filters('bu_avatars_replace_avatar_text', esc_html__('Upload a new avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
+                    echo '<p class="description">' . apply_filters('bu_avatars_replace_avatar_text', esc_html__('Upload a new avatar.', 'basic-user-avatars'), $profile_user) . '</p>';
                 }
 
                 echo '<input type="submit" name="manage_avatar_submit" value="' . apply_filters('bu_avatars_update_button_text', esc_attr__('Update Avatar', 'basic-user-avatars')) . '" />';
 
             } else {
-                if (empty($profileuser->user_avatar)) {
-                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set.', 'basic-user-avatars'), $profileuser) . '</p>';
+                if (empty($profile_user->user_avatar)) {
+                    echo '<p class="description">' . apply_filters('bu_avatars_no_avatar_set_text', esc_html__('No local avatar is set.', 'basic-user-avatars'), $profile_user) . '</p>';
                 } else {
-                    echo '<p class="description">' . apply_filters('bu_avatars_permissions_text', esc_html__('You do not have permission to change your avatar.', 'basic-user-avatars'), $profileuser) . '</p>';
+                    echo '<p class="description">' . apply_filters('bu_avatars_permissions_text', esc_html__('You do not have permission to change your avatar.', 'basic-user-avatars'), $profile_user) . '</p>';
                 }	
             }
             ?>
@@ -72,11 +72,12 @@ class Shortcodes {
         return ob_get_clean();
     }
 
-    public function get_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = false, $args = []) {		
-		return apply_filters('user_avatar', $avatar, $id_or_email);
+    public function customize_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = false, $args = []) {		
+		return apply_filters('user_custom_avatar', $avatar, $id_or_email);
 	}
 
-    public function get_avatar_data($args, $id_or_email) {
+	// Function to filter avatar
+    public function customize_avatar_data($args, $id_or_email) {
 		if (!empty($args['force_default'])) {
 			return $args;
 		}
@@ -118,7 +119,7 @@ class Shortcodes {
 			}	
 		}
 		
-		$size = apply_filters('user_avatars_default_size', (int) $args['size'], $args);
+		$size = apply_filters('user_custom_avatars_default_size', (int) $args['size'], $args);
 
 		if (empty($local_avatars[$size])) {
 
@@ -151,15 +152,15 @@ class Shortcodes {
 		$user_avatar_url = $local_avatars[$size];
 
 		if ($user_avatar_url) {
-			$return_args['url'] = $user_avatar_url;
+			$return_args['url']  = $user_avatar_url;
 			$return_args['found_avatar'] = true;
 		}
 
-		return apply_filters('user_avatar_data', $return_args);
+		return apply_filters('user_custom_avatar_data', $return_args);
 	}
 
-    //Function to add fields to update the profile picture
-    public function edit_user_profile($profileuser) {
+    // Function to add fields to update the profile picture
+    public function edit_user_avatar_profile($profile_user) {
         ?>
 
 		<h2>Avatar</h2>
@@ -167,7 +168,7 @@ class Shortcodes {
 			<tr>
 				<th><label for="basic-user-avatar">Upload Avatar</label></th>
 				<td style="width: 50px;" valign="top">
-					<?php echo get_avatar($profileuser->ID); ?>
+					<?php echo get_avatar($profile_user->ID); ?>
 				</td>
 				<td>
 				<?php
@@ -177,7 +178,7 @@ class Shortcodes {
 					
 					echo '<input type="file" name="basic-user-avatar" id="basic-local-avatar" />';
 
-					if (empty($profileuser->user_avatar)) {
+					if (empty($profile_user->user_avatar)) {
 						echo '<p class="description">' . esc_html__('No local avatar is set. Use the upload field to add a local avatar.', 'basic-user-avatars') . '</p>';
 					} else {
 						
@@ -185,7 +186,7 @@ class Shortcodes {
 					}
 
 				} else {
-					if (empty($profileuser->user_avatar)) {
+					if (empty($profile_user->user_avatar)) {
 						echo '<p class="description">' . esc_html__('No local avatar is set. Set up your avatar at Gravatar.com.', 'basic-user-avatars') . '</p>';
 					} else {
 						echo '<p class="description">' . esc_html__('You do not have media management permissions. To change your local avatar, contact the site administrator.', 'basic-user-avatars') . '</p>';
@@ -199,8 +200,8 @@ class Shortcodes {
 		<?php
     }
 
-    //Function to save the profile picture
-    public function edit_user_profile_update($user_id) {
+    // Function to save the profile picture
+    public function update_user_avatar_profile($user_id) {
 		if (!isset($_POST['_user_avatar_nonce']) || !wp_verify_nonce($_POST['_user_avatar_nonce'], 'user_avatar_nonce'))
             return;
 
@@ -215,16 +216,16 @@ class Shortcodes {
             if (!function_exists('wp_handle_upload'))
                 require_once ABSPATH . 'wp-admin/includes/file.php';
 
-            $this->avatar_delete($this->user_id_being_edited);
+            $this->avatar_delete($this->editing_user_id);
 
             if (strstr($_FILES['basic-user-avatar']['name'], '.php'))
                 wp_die('For security reasons, the extension ".php" cannot be in your file name.');
 
-            $this->user_id_being_edited = $user_id; 
+            $this->editing_user_id = $user_id; 
             $avatar = wp_handle_upload($_FILES['basic-user-avatar'], [
                 'mimes' => $mimes, 
                 'test_form' => false, 
-                'unique_filename_callback' => [$this, 'unique_filename_callback']
+                'unique_filename_callback' => [$this, 'generate_unique_filename']
             ]);
 
             if (empty($avatar['file'])) {  
@@ -253,6 +254,7 @@ class Shortcodes {
         }
     }
 
+	// Function to delete the avatar
     public function avatar_delete($user_id) {
 		$old_avatars = get_user_meta($user_id, 'user_avatar', true);
 		$upload_path = wp_upload_dir();
@@ -267,3 +269,5 @@ class Shortcodes {
 		delete_user_meta($user_id, 'user_avatar');
 	}
 }
+
+      
