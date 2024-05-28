@@ -29,7 +29,7 @@ class Shortcodes {
         
         # Check if the form has been submitted, and update profile avatar
         if (isset($_POST['avatar_submit_button'])) {
-            $this->profileUpdater->update_profile($userID); #més informació, no???
+            $this->profileUpdater->update_profile($userID);
         }
 
         # Start HTML print
