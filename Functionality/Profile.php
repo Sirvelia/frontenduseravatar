@@ -8,13 +8,11 @@ class Profile {
 	protected $plugin_id;
     protected $plugin_version;
 
-    protected $profileUpdater;
     
     public function __construct($plugin_id, $plugin_version) {
         $this->plugin_id = $plugin_id;
-        $this->plugin_version = $plugin_version;
-        $this->profileUpdater = new ProfileUpdater();
-        
+        $this->plugin_version = $plugin_version;  
+              
         # Hook for own profile (new fields)
         add_action('show_user_profile', [$this, 'edit_user_profile']); 
 
@@ -41,6 +39,6 @@ class Profile {
     }
 
     public function update_avatar($userID) {
-        $this->profileUpdater->update_profile($userID); 
+        ProfileUpdater::update_profile($userID); 
     }
 }    

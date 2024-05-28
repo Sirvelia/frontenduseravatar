@@ -7,12 +7,10 @@ use FrontendUserAvatar\Components\ProfileUpdater;
 class Shortcodes {
 	protected $plugin_id;
     protected $plugin_version;
-    protected $profileUpdater;
     
     public function __construct($plugin_id, $plugin_version) {
         $this->plugin_id = $plugin_id;
         $this->plugin_version = $plugin_version;
-        $this->profileUpdater = new ProfileUpdater();
         
         add_shortcode('frontend-user-avatar', [$this, 'frontend_user_avatar_shortcode']);
     }
@@ -29,7 +27,7 @@ class Shortcodes {
         
         # Check if the form has been submitted, and update profile avatar
         if (isset($_POST['avatar_submit_button'])) {
-            $this->profileUpdater->update_profile($userID);
+            ProfileUpdater::update_profile($userID);
         }
 
         # Start HTML print
