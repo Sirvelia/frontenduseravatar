@@ -41,6 +41,6 @@ class Profile {
     }
 
     public function update_avatar($userID) {
-        $this->profileUpdater->update_profile($userID); #???
+        $this->profileUpdater->update_profile($userID); 
     }
 }    
