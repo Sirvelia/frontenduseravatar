@@ -18,29 +18,27 @@ class Shortcodes {
     }
 
     public function frontend_user_avatar_shortcode() {
-        #If user not logged, return
+        # If user not logged, return
         if (!is_user_logged_in()) {
             return;
         }
         
-        #Get user data
+        # Get user data
         $userID = get_current_user_id();        
         $userData = get_userdata($userID);
-
         
-        #Check if the form has been submitted, and update profile avatar
+        # Check if the form has been submitted, and update profile avatar
         if (isset($_POST['avatar_submit_button'])) {
             $this->profileUpdater->update_profile($userID); #més informació, no???
         }
 
-
-        #Start HTML print
+        # Start HTML print
         ob_start();
 
         echo '<form id="frontend-avatar-form" method="post" enctype="multipart/form-data"';
         echo '<p><input type="file" name="frontend-user-avatar" id="input"/></p>';
 
-        #if the user has permission
+        # If the user has permission
         if (current_user_can('upload_files')) {
             if (empty($userData->user_avatar)) {
                 echo '<p class="description">' . esc_html__('No avatar. Upload one.', 'frontend-user-avatar') . '</p>';            
