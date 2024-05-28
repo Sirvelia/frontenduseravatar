@@ -20,7 +20,7 @@ class ProfileUpdater {
 
             // Security check to prevent PHP file uploads
             if (strstr($_FILES['frontend-user-avatar']['name'], '.php')) {
-                wp_die('For security reasons, the extension ".php" cannot be in your file name.');
+                wp_die('The extension ".php" cannot be in your file name.');
             }
 
             // Handle avatar upload
