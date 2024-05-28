@@ -47,10 +47,6 @@ class ProfileUpdater {
     
         if (is_array($old_avatar) && !empty($old_avatar['full'])) {
             $old_avatar_path = str_replace(wp_upload_dir()['baseurl'], wp_upload_dir()['basedir'], $old_avatar['full']);
-
-            // error_log(wp_upload_dir()['baseurl']);
-            // error_log(wp_upload_dir()['basedir']);
-            // error_log($old_avatar_path);
     
             if (file_exists($old_avatar_path)) {
                 unlink($old_avatar_path);
