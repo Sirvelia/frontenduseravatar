@@ -3,7 +3,12 @@
 namespace FrontendUserAvatar\Components;
 
 class ProfileUpdater {
-    public static function update_profile($userID) {
+    public static function update_profile($user_id) {
+        if (!is_user_logged_in()) {
+            wp_redirect(home_url());
+            exit;
+        }       
+
         if (!empty($_FILES['frontend-user-avatar']['name'])) {
             
             # Allowed mime types
@@ -20,7 +25,7 @@ class ProfileUpdater {
 
             # Security check to prevent PHP file uploads
             if (strstr($_FILES['frontend-user-avatar']['name'], '.php')) {
-                wp_die('The extension ".php" cannot be in your file name.');
+                wp_die(esc_html__('The extension ".php" cannot be in your file name.', 'frontend-user-avatar'));
             }
 
             # Handle avatar upload
@@ -31,15 +36,15 @@ class ProfileUpdater {
 
             if ($avatar && !isset($avatar['error'])) {
                 # Delete existing avatar
-                self::avatar_delete($userID);
+                self::avatar_delete($user_id);
 
                 # Update user meta with new avatar URL
-                update_user_meta($userID, 'frontend-user-avatar', ['full' => $avatar['url']]);
+                update_user_meta($user_id, 'frontend-user-avatar', ['full' => $avatar['url']]);
             } else {
                 # Handle upload error
-                wp_die('Avatar upload failed: ' . $avatar['error']);
+                wp_die(esc_html__('Avatar upload failed: ', 'frontend-user-avatar') . $avatar['error']);
             }
-        }
+        }        
     }
 
     public static function avatar_delete($userID) {

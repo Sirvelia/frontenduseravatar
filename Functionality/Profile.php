@@ -27,7 +27,7 @@ class Profile {
     }
 
     # Interface to upload a new avatar from the admin page
-    public function edit_user_profile($userData) {        
+    public function edit_user_profile($user_data) {        
         echo '<h2>' . esc_html__('Avatar', 'frontend-user-avatar') . '</h2>';
         echo  '<p>' . esc_html__('Upload new avatar', 'frontend-user-avatar') . '</p>';
         echo '<p><input type="file" name="frontend-user-avatar" id="input"/></p>';
@@ -35,7 +35,7 @@ class Profile {
         echo '<script type="text/javascript">var form = document.getElementById("your-profile"); form.encoding = "multipart/form-data"; form.setAttribute("enctype", "multipart/form-data");</script>'; 
     }
 
-    public function update_avatar($userID) {
-        ProfileUpdater::update_profile($userID); 
+    public function update_avatar($user_id) {
+        ProfileUpdater::update_profile($user_id); 
     }
 }    
