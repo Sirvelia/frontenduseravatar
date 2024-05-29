@@ -17,7 +17,7 @@ class Avatar {
     public function filter_avatar($args, $id_or_email) {
         $return_args = $args;
     
-        // Get user ID
+        # Get user ID
         $user = false;
         if (is_numeric($id_or_email) && $id_or_email > 0) {
             $user = (int) $id_or_email;
@@ -32,7 +32,7 @@ class Avatar {
             }
         }
     
-        // If user exists
+        # If user exists, get custom avatar
         if ($user) {
             $avatar_url = get_user_meta($user, 'frontend-user-avatar', true);
     

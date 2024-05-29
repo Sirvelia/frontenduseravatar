@@ -37,6 +37,7 @@ class Shortcodes {
         exit;
     }
 
+    # Frontend shortcode
     public function frontend_user_avatar_shortcode() {
         # If user not logged, return
         if (!is_user_logged_in()) {
