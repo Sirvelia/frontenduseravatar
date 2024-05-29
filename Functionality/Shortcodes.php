@@ -47,6 +47,9 @@ class Shortcodes {
             echo '<input type="submit" name="avatar_submit_button" value="' . esc_html__('Update avatar', 'frontend-user-avatar') . '" />';
 
         }
+
+        echo '</form>';
+        
         return ob_get_clean();
     }
 }      
