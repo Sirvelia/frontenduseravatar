@@ -48,12 +48,6 @@ class Shortcodes {
         $userData = get_userdata($userID);
         $currentUrl = home_url(add_query_arg(null, null));
 
-        
-        // # Check if the form has been submitted, and update profile avatar
-        // if (isset($_POST['avatar_submit_button'])) {
-        //     ProfileUpdater::update_profile($userID);
-        // }
-
         # Start HTML print
         ob_start();
 
