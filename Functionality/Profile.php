@@ -7,7 +7,6 @@ use FrontendUserAvatar\Components\ProfileUpdater;
 class Profile {
 	protected $plugin_id;
     protected $plugin_version;
-
     
     public function __construct($plugin_id, $plugin_version) {
         $this->plugin_id = $plugin_id;

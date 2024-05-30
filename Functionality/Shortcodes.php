@@ -2,9 +2,8 @@
 
 namespace FrontendUserAvatar\Functionality;
 
-use FrontendUserAvatar\Components\ProfileUpdater;
-
 class Shortcodes {
+
 	protected $plugin_id;
     protected $plugin_version;
     
@@ -13,28 +12,7 @@ class Shortcodes {
         $this->plugin_version = $plugin_version;
         
         add_shortcode('frontend-user-avatar', [$this, 'frontend_user_avatar_shortcode']);
-
-        # Register hook for POST form submission
-        #add_action('admin_post_update_frontend_avatar', [$this, 'handle_avatar_upload']);
-        #add_action('admin_post_nopriv_update_frontend_avatar', [$this, 'handle_avatar_upload']);
     }
-
-    // # Handle POST form submission
-    // public function handle_avatar_upload() {
-    //     if (!is_user_logged_in()) {
-    //         wp_redirect(home_url());
-    //         exit;
-    //     }
-
-    //     $user_id = get_current_user_id();
-
-    //     if (isset($_POST['avatar_submit_button'])) {
-    //         ProfileUpdater::update_profile(($user_id));
-    //     }
-
-    //     wp_redirect(wp_get_referer());
-    //     exit;
-    // }
 
     # Frontend shortcode
     public function frontend_user_avatar_shortcode() {
@@ -64,7 +42,6 @@ class Shortcodes {
             }
 
             echo '<input type="submit" name="avatar_submit_button" value="' . esc_html__('Update avatar', 'frontend-user-avatar') . '" />';
-
         }
 
         echo '</form>';

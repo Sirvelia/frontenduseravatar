@@ -10,7 +10,7 @@ class Avatar {
         $this->plugin_id = $plugin_id;
         $this->plugin_version = $plugin_version;      
 
-        #Filters avatar data
+        # Filters avatar data
         add_filter('get_avatar_data', [$this, 'filter_avatar'], 10, 2);
     }
 
