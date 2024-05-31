@@ -34,7 +34,7 @@ class PostActions {
 
     public function handle_avatar_upload() {
         # Get current user
-        $user_id = get_current_user_id();        
+        $user_id = get_current_user_id(); 
         
         # Update profile                   
         ProfileUpdater::update_profile($user_id);           

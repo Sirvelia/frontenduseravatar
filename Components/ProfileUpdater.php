@@ -7,7 +7,7 @@ class ProfileUpdater {
         if (!is_user_logged_in()) {
             wp_redirect(home_url());
             exit;
-        }       
+        }    
 
         # Nonce verification
         if (!isset($_POST['fua_update_frontend_avatar_nonce_field']) || !wp_verify_nonce( $_POST['fua_update_frontend_avatar_nonce_field'], 'fua_update_frontend_avatar_nonce' ) ) {
@@ -43,8 +43,26 @@ class ProfileUpdater {
                 # Delete existing avatar
                 self::avatar_delete($user_id);
 
+                $filename = $avatar['file'];
+
+                $attachment = array(
+                    'guid'           => $avatar['url'], 
+                    'post_mime_type' => $avatar['type'],
+                    'post_title'     => sanitize_file_name(pathinfo($filename, PATHINFO_FILENAME)),
+                    'post_content'   => '',
+                    'post_status'    => 'inherit'
+                );
+
+                # Insert attachment
+                $attach_id = wp_insert_attachment($attachment, $filename);
+                
+                # Generate metadata
+                require_once ABSPATH . 'wp-admin/includes/image.php';
+                $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
+                wp_update_attachment_metadata($attach_id, $attach_data);
+
                 # Update user meta with new avatar URL
-                update_user_meta($user_id, 'frontend-user-avatar', ['full' => $avatar['url']]);
+                update_user_meta($user_id, 'frontend-user-avatar', $attach_id);
             } else {
                 # Handle upload error
                 wp_die(esc_html__('Avatar upload failed: ', 'frontend-user-avatar') . $avatar['error']);
@@ -56,17 +74,9 @@ class ProfileUpdater {
         # Get old avatar
         $old_avatar = get_user_meta($userID, 'frontend-user-avatar', true);
     
-        # Unlink
-        if (is_array($old_avatar) && !empty($old_avatar['full'])) {
-            $old_avatar_path = str_replace(wp_upload_dir()['baseurl'], wp_upload_dir()['basedir'], $old_avatar['full']);
-    
-            if (file_exists($old_avatar_path)) {
-                unlink($old_avatar_path);
-            }
-        }
+        wp_delete_attachment($old_avatar, true);
         
         # Delete old avatar
         delete_user_meta($userID, 'frontend-user-avatar');
-    }
-    
+    }    
 }

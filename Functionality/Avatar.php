@@ -34,19 +34,19 @@ class Avatar {
     
         # If user exists, get custom avatar
         if ($user) {
-            $avatar_url = get_user_meta($user, 'frontend-user-avatar', true);
-    
-            if (!empty($avatar_url) && is_array($avatar_url)) {
-                $size = (int) $args['size'];
-                if (isset($avatar_url[$size])) {
-                    $return_args['url'] = $avatar_url[$size];
-                } elseif (isset($avatar_url['full'])) {
-                    $return_args['url'] = $avatar_url['full'];
+            $avatar_id = get_user_meta($user, 'frontend-user-avatar', true);
+
+            # If avatar exists
+            if ($avatar_id) {
+                $avatar_url = wp_get_attachment_url($avatar_id);
+
+                # If url exists
+                if ($avatar_url) {
+                    $return_args['url'] = $avatar_url;
                 }
             }
         }
     
         return $return_args;
-    }
-    
+    }    
 }    
