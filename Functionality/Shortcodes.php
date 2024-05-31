@@ -28,20 +28,20 @@ class Shortcodes {
         # Start HTML print
         ob_start();
 
-        echo '<form id="frontend-avatar-form" method="post" enctype="multipart/form-data" action="' . esc_url(admin_url('admin-post.php')) . '">';
-        echo '<input type="hidden" name="action" value="update_frontend_avatar">';
-        wp_nonce_field('update_frontend_avatar_nonce', 'update_frontend_avatar_nonce_field');
-        echo '<p><input type="file" name="frontend-user-avatar" id="input"/></p>';
+        echo '<form class="fua_shortcode_form" method="post" enctype="multipart/form-data" action="' . esc_url(admin_url('admin-post.php')) . '">';
+        echo '<input type="hidden" name="action" value="fua_update_frontend_avatar">';
+        wp_nonce_field('fua_update_frontend_avatar_nonce', 'fua_update_frontend_avatar_nonce_field');
+        echo '<input class="fua_input_file" type="file" name="frontend-user-avatar"/>';
 
         # If the user has permission
         if (current_user_can('upload_files')) {
             if (empty($user_data->user_avatar)) {
-                echo '<p class="description">' . esc_html__('No avatar. Upload one.', 'frontend-user-avatar') . '</p>';            
+                echo '<p class="fua_description fua_no_avatar">' . esc_html__('No avatar. Upload one.', 'frontend-user-avatar') . '</p>';            
             } else {
-                echo '<p class="description">' . esc_html__('Upload a new avatar') . '</p>';
+                echo '<p class="fua_description fua_avatar">' . esc_html__('Upload a new avatar') . '</p>';
             }
 
-            echo '<input type="submit" name="avatar_submit_button" value="' . esc_html__('Update avatar', 'frontend-user-avatar') . '" />';
+            echo '<input class="fua_input_submit" type="submit" value="' . esc_html__('Update avatar', 'frontend-user-avatar') . '" />';
         }
 
         echo '</form>';

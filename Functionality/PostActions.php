@@ -29,22 +29,15 @@ class PostActions {
     }
 
     private function add_post_actions() {
-        $this->add_post_action('update_frontend_avatar', 'handle_avatar_upload');
+        $this->add_post_action('fua_update_frontend_avatar', 'handle_avatar_upload');
     }
 
     public function handle_avatar_upload() {
         # Get current user
-        $user_id = get_current_user_id();
-
-        # Nonce verification
-        if (!isset($_POST['update_frontend_avatar_nonce_field']) || !wp_verify_nonce( $_POST['update_frontend_avatar_nonce_field'], 'update_frontend_avatar_nonce' ) ) {
-            wp_die(esc_html__('Security check', 'frontend-user-avatar'));
-        }
+        $user_id = get_current_user_id();        
         
-        # If it the correct post, update profile
-        if (isset($_POST['avatar_submit_button'])) {            
-            ProfileUpdater::update_profile($user_id);   
-        }
+        # Update profile                   
+        ProfileUpdater::update_profile($user_id);           
         
         # Go back to page
         wp_redirect(wp_get_referer());

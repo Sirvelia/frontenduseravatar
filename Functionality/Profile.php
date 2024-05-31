@@ -27,10 +27,9 @@ class Profile {
 
     # Interface to upload a new avatar from the admin page
     public function edit_user_profile($user_data) {        
-        echo '<h2>' . esc_html__('Avatar', 'frontend-user-avatar') . '</h2>';
-        echo  '<p>' . esc_html__('Upload new avatar', 'frontend-user-avatar') . '</p>';
-        echo '<p><input type="file" name="frontend-user-avatar" id="input"/></p>';
-        echo '<input type="submit" name="avatar-submit-button" value="' . esc_html__('Update avatar', 'frontend-user-avatar') .  '"/>';
+        echo '<h2 class="fua_admin_page_title">' . esc_html__('Avatar', 'frontend-user-avatar') . '</h2>';
+        echo '<p class="fua_admin_page_description">' . esc_html__('Upload new avatar', 'frontend-user-avatar') . '</p>';
+        echo '<p><input class="fua_input_file" type="file" name="frontend-user-avatar"/></p>';        
         echo '<script type="text/javascript">var form = document.getElementById("your-profile"); form.encoding = "multipart/form-data"; form.setAttribute("enctype", "multipart/form-data");</script>'; 
     }
 

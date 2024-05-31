@@ -9,14 +9,19 @@ class ProfileUpdater {
             exit;
         }       
 
-        if (!empty($_FILES['frontend-user-avatar']['name'])) {
+        # Nonce verification
+        if (!isset($_POST['fua_update_frontend_avatar_nonce_field']) || !wp_verify_nonce( $_POST['fua_update_frontend_avatar_nonce_field'], 'fua_update_frontend_avatar_nonce' ) ) {
+            wp_die(esc_html__('Security check', 'frontend-user-avatar'));
+        }
+
+        if (isset($_FILES['frontend-user-avatar']) && !empty($_FILES['frontend-user-avatar']['name'])) {
             
             # Allowed mime types
-            $mimes = [
+            $mimes = apply_filters('fua/allowed_mime_types', [
                 'jpg|jpeg|jpe' => 'image/jpeg',
                 'gif'          => 'image/gif',
                 'png'          => 'image/png',
-            ];
+            ]);
 
             # Load necessary file handling functions if not already loaded
             if (!function_exists('wp_handle_upload')) {
