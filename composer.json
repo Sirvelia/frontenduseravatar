@@ -26,7 +26,7 @@
 	"license": "GPL-3.0+",
 	"name": "sirvelia/frontend-user-avatar",
 	"require": {
-		"php": "\u003e=7.4"
+		"php": ">=7.4"
 	},
 	"require-dev": {},
 	"type": "wordpress-plugin"
