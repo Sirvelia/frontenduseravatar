@@ -3,14 +3,13 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       FrontendUserAvatar
- * Plugin URI:        https://sirvelia.com/
- * Description:       A WordPress plugin made with PLUBO.
+ * Description:       Easily update your user profile avatar from the frontend by adding the [frontend-user-avatar] shortcode
  * Version:           1.0.0
  * Author:            Sirvelia
  * Author URI:        https://sirvelia.com/
  * License:           GPL-3.0+
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain:       frontend-user-avatar
+ * Text Domain:       frontenduseravatar
  * Domain Path:       /languages
  * Requires Plugins:
  */

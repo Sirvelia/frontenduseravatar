@@ -36,12 +36,12 @@ class Shortcodes {
         # If the user has permission
         if (current_user_can('upload_files')) {
             if (empty($user_data->user_avatar)) {
-                echo '<p class="fua_description fua_no_avatar">' . esc_html__('No avatar. Upload one.', 'frontend-user-avatar') . '</p>';            
+                echo '<p class="fua_description fua_no_avatar">' . esc_html__('No avatar. Upload one.', 'frontenduseravatar') . '</p>';            
             } else {
-                echo '<p class="fua_description fua_avatar">' . esc_html__('Upload a new avatar') . '</p>';
+                echo '<p class="fua_description fua_avatar">' . esc_html__('Upload a new avatar', 'frontenduseravatar') . '</p>';
             }
 
-            echo '<input class="fua_input_submit" type="submit" value="' . esc_html__('Update avatar', 'frontend-user-avatar') . '" />';
+            echo '<input class="fua_input_submit" type="submit" value="' . esc_html__('Update avatar', 'frontenduseravatar') . '" />';
         }
 
         echo '</form>';

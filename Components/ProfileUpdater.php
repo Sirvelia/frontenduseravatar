@@ -7,14 +7,20 @@ class ProfileUpdater {
         if (!is_user_logged_in()) {
             wp_redirect(home_url());
             exit;
-        }    
-
-        # Nonce verification
-        if (!isset($_POST['fua_update_frontend_avatar_nonce_field']) || !wp_verify_nonce( $_POST['fua_update_frontend_avatar_nonce_field'], 'fua_update_frontend_avatar_nonce' ) ) {
-            wp_die(esc_html__('Security check', 'frontend-user-avatar'));
         }
 
-        if (isset($_FILES['frontend-user-avatar']) && !empty($_FILES['frontend-user-avatar']['name'])) {
+        # Nonce verification
+        $nonce = wp_unslash( sanitize_text_field( $_POST['fua_update_frontend_avatar_nonce_field'] ?? '' ) );
+        if ( !$nonce || !wp_verify_nonce( $nonce, 'fua_update_frontend_avatar_nonce' ) ) {
+            wp_die(esc_html__('Security check', 'frontenduseravatar'));
+        }
+
+        if ( empty( $_FILES ) || !isset( $_FILES['frontend-user-avatar'] ) ) {
+            wp_die(esc_html__('Avatar upload failed: ', 'frontenduseravatar'));
+        }
+
+        $uploaded_file_name = sanitize_file_name( $_FILES['frontend-user-avatar']['name'] ?? '' );
+        if (isset($_FILES['frontend-user-avatar']) && $uploaded_file_name) {
             
             # Allowed mime types
             $mimes = apply_filters('fua/allowed_mime_types', [
@@ -29,8 +35,8 @@ class ProfileUpdater {
             }
 
             # Security check to prevent PHP file uploads
-            if (strstr($_FILES['frontend-user-avatar']['name'], '.php')) {
-                wp_die(esc_html__('The extension ".php" cannot be in your file name.', 'frontend-user-avatar'));
+            if (strstr($uploaded_file_name, '.php')) {
+                wp_die(esc_html__('The extension ".php" cannot be in your file name.', 'frontenduseravatar'));
             }
 
             # Handle avatar upload
@@ -65,7 +71,7 @@ class ProfileUpdater {
                 update_user_meta($user_id, 'frontend-user-avatar', $attach_id);
             } else {
                 # Handle upload error
-                wp_die(esc_html__('Avatar upload failed: ', 'frontend-user-avatar') . $avatar['error']);
+                wp_die(esc_html__('Avatar upload failed: ', 'frontenduseravatar') . $avatar['error']);
             }
         }        
     }

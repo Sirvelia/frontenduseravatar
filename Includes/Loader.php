@@ -20,7 +20,7 @@ class Loader
                 try {
                     new $class_name(FRONTENDUSERAVATAR_NAME, FRONTENDUSERAVATAR_VERSION);
                 } catch (\Throwable $e) {
-                    pb_log($e);
+                    frontenduseravatar_log($e);
                     continue;
                 }
             }
@@ -34,7 +34,7 @@ class Loader
                     try {
                         new $class_name(FRONTENDUSERAVATAR_NAME, FRONTENDUSERAVATAR_VERSION);
                     } catch (\Throwable $e) {
-                        pb_log($e);
+                        frontenduseravatar_log($e);
                         continue;
                     }
                 }

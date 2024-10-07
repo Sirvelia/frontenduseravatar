@@ -2,6 +2,8 @@
 /.github
 /node_modules
 /.wordpress-org
+/Entities
+/resources
 
 .editorconfig
 .distignore
