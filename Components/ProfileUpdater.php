@@ -16,7 +16,7 @@ class ProfileUpdater {
         }
 
         if ( empty( $_FILES ) || !isset( $_FILES['frontend-user-avatar'] ) ) {
-            wp_die(esc_html__('Avatar upload failed: ', 'frontenduseravatar'));
+            return;
         }
 
         $uploaded_file_name = sanitize_file_name( $_FILES['frontend-user-avatar']['name'] ?? '' );

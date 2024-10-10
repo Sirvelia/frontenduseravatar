@@ -6,3 +6,37 @@
 
 /** Import specific components */
 // @import "components/buttons";
+
+.fua_switch_avatar_button {
+    padding: 0 !important; display: flex !important;
+}
+
+.hidden {
+	display: none;
+}
+
+.fua_button {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 23px;
+	margin: 0;
+	padding: 0 10px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-border-radius: 3px;
+    appearance: none;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-color: #2271b1;
+}
+
+.fua_button_primary {
+	background-color: #2271b1;
+	color: white;
+}

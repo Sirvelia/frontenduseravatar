@@ -12,6 +12,7 @@ class Shortcodes {
         $this->plugin_version = $plugin_version;
         
         add_shortcode('frontend-user-avatar', [$this, 'frontend_user_avatar_shortcode']);
+        add_action( 'wp_enqueue_scripts', [ $this, 'frontend_user_avatar_shortcode_scripts' ] );
     }
 
     # Frontend shortcode
@@ -27,25 +28,32 @@ class Shortcodes {
 
         # Start HTML print
         ob_start();
+        ?>
 
-        echo '<form class="fua_shortcode_form" method="post" enctype="multipart/form-data" action="' . esc_url(admin_url('admin-post.php')) . '">';
-        echo '<input type="hidden" name="action" value="fua_update_frontend_avatar">';
-        wp_nonce_field('fua_update_frontend_avatar_nonce', 'fua_update_frontend_avatar_nonce_field');
-        echo '<input class="fua_input_file" type="file" name="frontend-user-avatar"/>';
+        <form class="fua_shortcode_form" method="POST" enctype="multipart/form-data" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+            <input type="hidden" name="action" value="fua_update_frontend_avatar">
+            <?php wp_nonce_field( 'fua_update_frontend_avatar_nonce', 'fua_update_frontend_avatar_nonce_field' ); ?>
 
-        # If the user has permission
-        if (current_user_can('upload_files')) {
-            if (empty($user_data->user_avatar)) {
-                echo '<p class="fua_description fua_no_avatar">' . esc_html__('No avatar. Upload one.', 'frontenduseravatar') . '</p>';            
-            } else {
-                echo '<p class="fua_description fua_avatar">' . esc_html__('Upload a new avatar', 'frontenduseravatar') . '</p>';
-            }
+            <button id="fua_avatar_switch_button" class="fua_switch_avatar_button fua_button" type="button" class="button">
+                <img id="fua_avatar_preview" src="<?php echo get_avatar_url( $user_data->ID ); ?>" alt="<?php echo esc_html__( 'Current avatar', 'frontenduseravatar' ); ?>" width="96" height="96">
+            </button>
 
-            echo '<input class="fua_input_submit" type="submit" value="' . esc_html__('Update avatar', 'frontenduseravatar') . '" />';
-        }
+            <input id="fua_avatar_input" class="hidden" type="file" accept="image/*" name="frontend-user-avatar">
 
-        echo '</form>';
+            <input class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Update avatar', 'frontenduseravatar'); ?>" />
+        </form>
         
+        <?php
         return ob_get_clean();
+    }
+
+    public function frontend_user_avatar_shortcode_scripts()
+    {
+        $post_content = get_the_content();
+
+        if ( has_shortcode( $post_content, 'frontend-user-avatar' ) ) {
+            wp_enqueue_script( $this->plugin_id, frontenduseravatar_asset( 'app.js' ), [], $this->plugin_version );
+            wp_enqueue_style( $this->plugin_id, frontenduseravatar_asset( 'app.css' ), [], $this->plugin_version );
+        }
     }
 }      

@@ -3,6 +3,7 @@
 namespace FrontendUserAvatar\Functionality;
 
 use FrontendUserAvatar\Components\ProfileUpdater;
+use WP_User;
 
 class Profile {
 	protected $plugin_id;
@@ -29,11 +30,22 @@ class Profile {
     }
 
     # Interface to upload a new avatar from the admin page
-    public function edit_user_profile($user_data) {        
-        echo '<h2 class="fua_admin_page_title">' . esc_html__('Avatar', 'frontenduseravatar') . '</h2>';
-        wp_nonce_field('fua_update_frontend_avatar_nonce', 'fua_update_frontend_avatar_nonce_field');
-        echo '<p class="fua_admin_page_description">' . esc_html__('Upload new avatar', 'frontenduseravatar') . '</p>';
-        echo '<p><input class="fua_input_file" type="file" name="frontend-user-avatar"/></p>';        
+    public function edit_user_profile(WP_User $user_data) {
+        ob_start();
+        ?>
+            <h2 class="fua_admin_page_title"><?php echo esc_html__( 'Edit Avatar', 'frontenduseravatar' ); ?></h2>
+            
+            <?php wp_nonce_field( 'fua_update_frontend_avatar_nonce', 'fua_update_frontend_avatar_nonce_field' ); ?>
+            
+            <button id="fua_avatar_switch_button" class="fua_switch_avatar_button button" type="button" class="button">
+                <img id="fua_avatar_preview" src="<?php echo get_avatar_url( $user_data->ID ); ?>" alt="<?php echo esc_html__( 'Current avatar', 'frontenduseravatar' ); ?>" width="96" height="96">
+            </button>
+
+            <input id="fua_avatar_input" class="hidden" type="file" accept="image/*" name="frontend-user-avatar">
+        <?php
+        $avatar_html = ob_get_clean();
+
+        echo $avatar_html;
     }
 
     public function update_avatar($user_id) {
@@ -44,8 +56,9 @@ class Profile {
     {
         $screen = get_current_screen();
 
-        if ( $screen && $screen->id === 'user-edit' ) {
+        if ( $screen && $screen->id === 'user-edit' || $screen->id === 'profile' ) {
             wp_enqueue_script( $this->plugin_id, frontenduseravatar_asset( 'app.js' ), [], $this->plugin_version );
+            wp_enqueue_style( $this->plugin_id, frontenduseravatar_asset( 'app.css' ), [], $this->plugin_version );
         }
     }
 }    
