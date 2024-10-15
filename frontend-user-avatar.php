@@ -4,7 +4,7 @@
  * @wordpress-plugin
  * Plugin Name:       Frontend User Avatar
  * Description:       Easily update your user profile avatar from the frontend by adding the [frontend-user-avatar] shortcode
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Sirvelia
  * Author URI:        https://sirvelia.com/
  * License:           GPL-3.0+
@@ -20,7 +20,7 @@ if (!defined('WPINC')) {
 
 // PLUGIN CONSTANTS
 define('FRONTENDUSERAVATAR_NAME', 'frontend-user-avatar');
-define('FRONTENDUSERAVATAR_VERSION', '1.0.1');
+define('FRONTENDUSERAVATAR_VERSION', '1.0.2');
 define('FRONTENDUSERAVATAR_PATH', plugin_dir_path(__FILE__));
 define('FRONTENDUSERAVATAR_BASENAME', plugin_basename(__FILE__));
 define('FRONTENDUSERAVATAR_URL', plugin_dir_url(__FILE__));

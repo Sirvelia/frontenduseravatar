@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,6 +38,15 @@ It can also be installed manually.
 
 * First upload
 
-= 1.0.0 2024-10-10 =
+= 1.0.1 2024-10-10 =
 
 **Improved form design**
+
+* Improved design to have an image preview on the shortcode
+
+= 1.0.2 2024-15-10 =
+
+**Improved image preview design and added a preview shortcode**
+
+* Improved the image preview design to make more clear how to upload and update the avatar
+* Added a second shortcode [frontend-avatar-preview] to display your current avatar
