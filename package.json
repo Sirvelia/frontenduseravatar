@@ -41,7 +41,7 @@
 		"start": "wp-scripts start",
 		"translate": "yarn translate:pot \u0026\u0026 yarn translate:js",
 		"translate:js": "wp i18n make-json ./languages --pretty-print",
-		"translate:pot": "wp i18n make-pot . ./languages/plugin-placeholder.pot --ignore-domain --include=\"react,resources\""
+		"translate:pot": "wp i18n make-pot . ./languages/frontenduseravatar.pot --ignore-domain --include=\"react,resources,Functionality,Components\""
 	},
 	"version": "0.4.5"
 }

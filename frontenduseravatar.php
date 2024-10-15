@@ -19,7 +19,7 @@ if (!defined('WPINC')) {
 }
 
 // PLUGIN CONSTANTS
-define('FRONTENDUSERAVATAR_NAME', 'frontend-user-avatar');
+define('FRONTENDUSERAVATAR_NAME', 'frontenduseravatar');
 define('FRONTENDUSERAVATAR_VERSION', '1.0.2');
 define('FRONTENDUSERAVATAR_PATH', plugin_dir_path(__FILE__));
 define('FRONTENDUSERAVATAR_BASENAME', plugin_basename(__FILE__));

@@ -44,6 +44,6 @@ class Loader
 
     public function loadPluginTextdomain()
     {
-        load_plugin_textdomain('frontend-user-avatar', false, dirname(FRONTENDUSERAVATAR_BASENAME) . '/languages/');
+        load_plugin_textdomain('frontenduseravatar', false, dirname(FRONTENDUSERAVATAR_BASENAME) . '/languages/');
     }
 }
