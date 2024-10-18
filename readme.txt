@@ -1,5 +1,5 @@
 === Frontend User Avatar ===
-Contributors: sirvelia, jordipalomera, alberttarress, joanrodas, amadeuarderiu
+Contributors: sirvelia, jordipalomera, alberttarress, joanrodas, amadeuarderiu, jamposta
 Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
