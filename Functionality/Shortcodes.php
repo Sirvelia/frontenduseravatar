@@ -41,7 +41,7 @@ class Shortcodes {
 
             <input id="fua_avatar_input" class="hidden" type="file" accept="image/*" name="frontend-user-avatar">
 
-            <input class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Save avatar', 'frontenduseravatar'); ?>" />
+            <input id="fua_avatar_submit" disabled class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Save avatar', 'frontenduseravatar'); ?>" />
         </form>
         
         <?php

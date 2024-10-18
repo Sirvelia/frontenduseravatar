@@ -56,6 +56,10 @@
 	box-sizing: border-box;
 	border-color: #2271b1;
 }
+.fua_button:disabled {
+	cursor: not-allowed !important;
+	opacity: 0.3 !important;
+}
 
 .fua_button_primary {
 	background-color: #2271b1;

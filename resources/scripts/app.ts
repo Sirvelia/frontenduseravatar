@@ -22,6 +22,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const imagePreview = document.getElementById("fua_avatar_preview") as HTMLImageElement
             imagePreview.src = blobUrl
             imagePreview.onload = () => URL.revokeObjectURL(blobUrl)
+
+            const saveButton = document.getElementById("fua_avatar_submit") as HTMLButtonElement
+            saveButton.disabled = false;
         }
     })
 });

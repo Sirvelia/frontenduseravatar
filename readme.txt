@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,3 +50,9 @@ It can also be installed manually.
 
 * Improved the image preview design to make more clear how to upload and update the avatar
 * Added a second shortcode [frontend-avatar-preview] to display your current avatar
+
+= 1.0.3 2024-18-10 =
+
+**Improved 'Save Avatar' button for the [frontend-user-avatar] shortcode
+
+* Now the 'Save Avatar' button of this shortcode will be disabled until the user uploads an image
