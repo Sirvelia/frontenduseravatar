@@ -8,11 +8,14 @@ Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Easily update your user profile avatar from the frontend by adding the [frontend-user-avatar] shortcode
+Effortlessly manage and display your user profile avatar from the frontend
 
 == Description ==
 
-Easily update your user profile avatar from the frontend by adding the [frontend-user-avatar] shortcode
+Effortlessly manage and display your user profile avatar from the frontend. 
+
+Use the [frontend-user-avatar] shortcode to allow users to upload or update their avatar directly on your site. 
+Additionally, the [frontend-avatar-preview] shortcode provides a real-time preview of the current avatar, enhancing the user experience with a visual confirmation before any changes are made.
 
 == Installation ==
 

@@ -3,7 +3,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       Frontend User Avatar
- * Description:       Easily update your user profile avatar from the frontend by adding the [frontend-user-avatar] shortcode
+ * Description:       Effortlessly manage and display your user profile avatar from the frontend
  * Version:           1.0.3
  * Author:            Sirvelia
  * Author URI:        https://sirvelia.com/
