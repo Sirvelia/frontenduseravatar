@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,3 +59,9 @@ It can also be installed manually.
 **Improved 'Save Avatar' button for the [frontend-user-avatar] shortcode
 
 * Now the 'Save Avatar' button of this shortcode will be disabled until the user uploads an image
+
+= 1.0.4 2024-25-10 =
+
+**Improved Plugin Description**
+
+* Now the plugin description includes both shortcodes [frontend-user-avatar] and [frontend-avatar-preview]
