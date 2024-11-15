@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,3 +65,10 @@ It can also be installed manually.
 **Improved Plugin Description**
 
 * Now the plugin description includes both shortcodes [frontend-user-avatar] and [frontend-avatar-preview]
+
+= 1.0.5 2024-15-11 =
+
+**Added Shortcode Parameters**
+
+* Now the the [frontend-user-avatar] and [frontend-avatar-preview] shortcodes have a 'width' and 'height' parameters, to let users adjust the image preview size
+* Added a 'frontend-avatar-preview' class to the [frontend-avatar-preview] shortcode image
