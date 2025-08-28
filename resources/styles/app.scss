@@ -1,37 +1,3 @@
-/** Import defined variables */
-@import "common/variables";
-
-/** Import global styles */
-@import "common/global";
-
-/** Import specific components */
-// @import "components/buttons";
-
-.fua_switch_avatar_button {
-    padding: 0 !important; display: flex !important;
-	position: relative;
-
-	&::before {
-        content: var(--fua-upload-text, 'Upload');
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 14px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-    }
-
-    &:hover::before {
-        opacity: 1;
-    }
-}
-
 .hidden {
 	display: none;
 }
@@ -64,4 +30,36 @@
 .fua_button_primary {
 	background-color: #2271b1;
 	color: white;
+}
+
+.fua_switch_avatar_button {
+	padding: 0 !important;
+	display: flex !important;
+	position: relative;
+	margin-bottom: 0.5rem;
+
+	&::before {
+		content: var(--fua-upload-text, 'Upload');
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: white;
+		background-color: rgba(0, 0, 0, 0.6);
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-size: 14px;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+	}
+
+	&:hover::before {
+		opacity: 1;
+	}
+}
+
+.fua_helper_text {
+	margin: 0;
+	font-size: 0.8rem;
 }

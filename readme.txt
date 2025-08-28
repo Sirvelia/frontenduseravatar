@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,40 +35,45 @@ It can also be installed manually.
 
 == Changelog ==
 
-= 1.0.0 2024-09-09 =
+= 1.0.6 =
 
-**Frontend User Avatar**
+* Added helper text to upload new avatar
+* Added more space after upload new avatar button
 
-* First upload
+= 1.0.5 =
 
-= 1.0.1 2024-10-10 =
+**Added Shortcode Parameters**
 
-**Improved form design**
+* Now the the [frontend-user-avatar] and [frontend-avatar-preview] shortcodes have a 'width' and 'height' parameters, to let users adjust the image preview size
+* Added a 'frontend-avatar-preview' class to the [frontend-avatar-preview] shortcode image
 
-* Improved design to have an image preview on the shortcode
+= 1.0.4 =
 
-= 1.0.2 2024-15-10 =
+**Improved Plugin Description**
+
+* Now the plugin description includes both shortcodes [frontend-user-avatar] and [frontend-avatar-preview]
+
+= 1.0.3 =
+
+**Improved 'Save Avatar' button for the [frontend-user-avatar] shortcode
+
+* Now the 'Save Avatar' button of this shortcode will be disabled until the user uploads an image
+
+= 1.0.2 =
 
 **Improved image preview design and added a preview shortcode**
 
 * Improved the image preview design to make more clear how to upload and update the avatar
 * Added a second shortcode [frontend-avatar-preview] to display your current avatar
 
-= 1.0.3 2024-18-10 =
+= 1.0.1 =
 
-**Improved 'Save Avatar' button for the [frontend-user-avatar] shortcode
+**Improved form design**
 
-* Now the 'Save Avatar' button of this shortcode will be disabled until the user uploads an image
+* Improved design to have an image preview on the shortcode
 
-= 1.0.4 2024-25-10 =
+= 1.0.0 =
 
-**Improved Plugin Description**
+**Frontend User Avatar**
 
-* Now the plugin description includes both shortcodes [frontend-user-avatar] and [frontend-avatar-preview]
-
-= 1.0.5 2024-15-11 =
-
-**Added Shortcode Parameters**
-
-* Now the the [frontend-user-avatar] and [frontend-avatar-preview] shortcodes have a 'width' and 'height' parameters, to let users adjust the image preview size
-* Added a 'frontend-avatar-preview' class to the [frontend-avatar-preview] shortcode image
+* First upload

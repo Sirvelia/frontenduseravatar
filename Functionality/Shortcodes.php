@@ -47,9 +47,14 @@ class Shortcodes
                 <img id="fua_avatar_preview" src="<?php echo get_avatar_url($user_data->ID); ?>" alt="<?php echo esc_html__('Current avatar', 'frontenduseravatar'); ?>" width="<?php echo $size['width']; ?>" height="<?php echo $size['height']; ?>">
             </button>
 
+            
             <input id="fua_avatar_input" class="hidden" type="file" accept="image/*" name="frontend-user-avatar">
 
-            <input id="fua_avatar_submit" disabled class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Save avatar', 'frontenduseravatar'); ?>" />
+            <div>
+                <input id="fua_avatar_submit" disabled class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Save avatar', 'frontenduseravatar'); ?>" />
+                <p class="fua_helper_text"><small><?php echo esc_html__('Click on the avatar to select a new image', 'frontenduseravatar'); ?></small></p>
+            </div>
+
         </form>
 
     <?php
