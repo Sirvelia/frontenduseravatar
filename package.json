@@ -1,5 +1,5 @@
 {
-	"author": "Joan Rodas \u003cjoan@sirvelia.com\u003e",
+	"author": "Joan Rodas <joan@sirvelia.com>",
 	"bugs": {
 		"url": "https://github.com/joanrodas/plubo/issues"
 	},
@@ -21,7 +21,7 @@
 		"webpack-manifest-plugin": "^5.0.0"
 	},
 	"engines": {
-		"node": "\u003e=16.0.0"
+		"node": ">=16.0.0"
 	},
 	"homepage": "https://plubo.dev",
 	"licenses": [
@@ -39,9 +39,13 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
-		"translate": "yarn translate:pot \u0026\u0026 yarn translate:js",
+		"translate": "yarn translate:pot && yarn translate:js",
 		"translate:js": "wp i18n make-json ./languages --pretty-print",
 		"translate:pot": "wp i18n make-pot . ./languages/frontenduseravatar.pot --ignore-domain --include=\"react,resources,Functionality,Components\""
 	},
-	"version": "0.4.5"
+	"version": "0.4.5",
+	"volta": {
+		"node": "22.18.0",
+		"yarn": "1.22.22"
+	}
 }
