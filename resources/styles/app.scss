@@ -10,8 +10,6 @@
 	margin: 0;
 	padding: 0 10px;
 	cursor: pointer;
-	border-width: 1px;
-	border-style: solid;
 	-webkit-border-radius: 3px;
     appearance: none;
 	-webkit-appearance: none;
@@ -20,7 +18,7 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	border-color: #2271b1;
+	border: 0;
 }
 .fua_button:disabled {
 	cursor: not-allowed !important;
@@ -30,6 +28,20 @@
 .fua_button_primary {
 	background-color: #2271b1;
 	color: white;
+
+	&:hover {
+		background-color: #1681d9;
+	}
+}
+
+.fua_delete_avatar_button {
+	background-color: #d63638;
+	color: white;
+	margin-left: 0.5rem;
+
+	&:hover {
+		background-color: #b32d2e;
+	}
 }
 
 .fua_switch_avatar_button {
@@ -57,6 +69,14 @@
 	&:hover::before {
 		opacity: 1;
 	}
+}
+
+.wp-admin .fua_switch_avatar_button {
+	margin-bottom: 0.5rem !important;
+}
+
+.fua_shortcode_form {
+	margin-bottom: 1rem;
 }
 
 .fua_helper_text {

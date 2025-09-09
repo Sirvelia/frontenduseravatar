@@ -27,4 +27,17 @@ window.addEventListener('DOMContentLoaded', () => {
             saveButton.disabled = false;
         }
     })
+
+    document.getElementById('fua_avatar_delete')?.addEventListener('click', function() {
+        if (confirm('Are you sure you want to delete your current avatar?')) {
+            // Clear the file input before submitting
+            const fileInput = document.getElementById('fua_avatar_input') as HTMLInputElement
+            fileInput.value = ''
+            const imagePreview = document.getElementById("fua_avatar_preview") as HTMLImageElement
+            imagePreview.src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+        } else {
+            // Prevent form submission if user cancels
+            return false
+        }
+    })
 });

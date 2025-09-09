@@ -47,6 +47,7 @@ class Profile
         <input id="fua_avatar_input" class="hidden" type="file" accept="image/*" name="frontend-user-avatar">
 
         <div>
+            <input id="fua_avatar_delete" class="fua_delete_avatar_button button" type="button" name="delete_avatar" value="<?php echo esc_html__('Delete avatar', 'frontenduseravatar'); ?>" />
             <p class="fua_helper_text"><small><?php echo esc_html__('Click on the avatar to select a new image', 'frontenduseravatar'); ?></small></p>
         </div>
 <?php

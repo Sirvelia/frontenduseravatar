@@ -52,6 +52,7 @@ class Shortcodes
 
             <div>
                 <input id="fua_avatar_submit" disabled class="fua_input_submit fua_button fua_button_primary" type="submit" value="<?php echo esc_html__('Save avatar', 'frontenduseravatar'); ?>" />
+                <input id="fua_avatar_delete" class="fua_delete_avatar_button fua_button" type="submit" name="delete_avatar" value="<?php echo esc_html__('Delete avatar', 'frontenduseravatar'); ?>" />
                 <p class="fua_helper_text"><small><?php echo esc_html__('Click on the avatar to select a new image', 'frontenduseravatar'); ?></small></p>
             </div>
 

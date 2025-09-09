@@ -4,7 +4,7 @@ Tags: user, avatar, frontend, upload, shortcodes
 Requires at least: 6.2
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 1.0.6
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,6 +34,11 @@ It can also be installed manually.
 4. Locate Frontend User Avatar in the list and click the *Activate* link.
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Added more spacing after avatar submit buttons
+* Added a Delete Button to reset the avatar
 
 = 1.0.6 =
 

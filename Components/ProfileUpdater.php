@@ -19,6 +19,13 @@ class ProfileUpdater {
             return;
         }
 
+        // Reset Avatar
+
+        if ( $_FILES['frontend-user-avatar']['name'] === '' ) {
+            self::avatar_delete($user_id);
+            return;
+        }
+
         $uploaded_file_name = sanitize_file_name( $_FILES['frontend-user-avatar']['name'] ?? '' );
         if (isset($_FILES['frontend-user-avatar']) && $uploaded_file_name) {
             
